@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+require('dotenv').config()
 const { v4: uuidV4 } = require('uuid')
 
 app.set('view engine', 'ejs') // Tell Express we are using EJS
@@ -30,4 +31,6 @@ io.on('connection', (socket) => {
   })
 })
 
-server.listen(80)
+server.listen(process.env.PORT || 3000, () => {
+  console.log('Server is up and running')
+})
